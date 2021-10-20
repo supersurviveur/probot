@@ -1,0 +1,21 @@
+{
+  "name": "probot",
+  "version": "1.0.0",
+  "description": "A Discord bot for pronote",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pronote"
+  ],
+  "author": "super_surviveur",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "@dorian-eydoux/pronote-api": "^2.3.4",
+    "@sapphire/snowflake": "^2.1.0",
+    "discord.js": "^13.2.0",
+    "node-forge": "^0.10.0"
+  }
+}
