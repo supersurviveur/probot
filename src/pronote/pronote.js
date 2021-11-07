@@ -23,23 +23,3 @@ exports.createSession = async (userId) => {
         })
     })
 }
-// async function main()
-// {
-//     const session = await createSession("586254543650684938").catch(err => {
-//         console.error(err)
-//         return err
-//     })
-    
-//     console.log(session.user.name); // Affiche le nom de l'élève
-//     console.log(session.user.studentClass.name); // Affiche la classe de l'élève
-    
-//     const timetable = await session.timetable(new Date(2021, 09, 11)); // Récupérer l'emploi du temps d'aujourd'hui
-//     const marks = await session.marks(); // Récupérer les notes du trimestre
-//     console.log(`L'élève a ${timetable.length} cours aujourd'hui`); 
-//     console.log(`et a pour l'instant une moyenne de ${marks.averages.student} ce trimestre.`);
-    
-//     // etc. les fonctions utilisables sont 'timetable', 'marks', 'contents', 'evaluations', 'absences', 
-//     // 'homeworks', 'infos', et 'menu', sans oublier les champs 'user' et 'params' qui regorgent d'informations.
-// }
-
-// main()

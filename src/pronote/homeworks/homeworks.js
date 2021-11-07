@@ -14,7 +14,6 @@ const generateEmbeds = async (interaction, date, userId, username) => {
     homeworkDate.setDate(homeworkDate.getDate() - 1)
 
     const session = await pronote.createSession(userId)
-    console.log(session.)
     const homeworks = await session.homeworks(homeworkDate)
 
     const attachment = new MessageAttachment('./assets/logo.png', 'logo.png')
@@ -87,18 +86,24 @@ const generateEmbeds = async (interaction, date, userId, username) => {
                 .setLabel('next week')
                 .setEmoji('⏩')
         )
+    const links = []
     if (files.length >= 1) {
-        const links = new MessageActionRow()
-        files.forEach(file => {
-            links.addComponents(
+        let actionRow
+        for (let i in files) {
+            if (i % 5 == 0) {
+                if (actionRow) links.push(actionRow)
+                actionRow = new MessageActionRow()
+            }
+            let file = files[i]
+            actionRow.addComponents(
                 new MessageButton()
                     .setStyle('LINK')
                     .setURL(file.url)
-                    .setLabel(file.name)
+                    .setLabel(file.name.slice(0, 80))
                     .setEmoji('📁')
             )
-        })
-        return [embeds, attachment, [row, links]]
+        }
+        return [embeds, attachment, [row, ...links]]
     }
     return [embeds, attachment, [row]]
 }

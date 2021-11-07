@@ -10,6 +10,8 @@ exports.parseDate = (interaction) => {
                 year = new Date().getFullYear()
             }
             let [day, month] = split
+            day = parseInt(day)
+            month = parseInt(month)
             if (day < 10) day = `0${day}`
             if (month < 10) month = `0${month}`
             date = new Date(`${year}-${month}-${day}T00:00:00.000Z`)
@@ -17,7 +19,6 @@ exports.parseDate = (interaction) => {
         }
     }
     if (!date || isNaN(date.getTime())) {
-        console.log(date)
         year = new Date().getFullYear()
         let day = new Date().getDate()
         let month = new Date().getMonth() + 1

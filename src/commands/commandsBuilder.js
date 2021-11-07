@@ -13,9 +13,12 @@ exports.addCommands = async (client, commands) => {
     const rest = new REST({ version: '9' }).setToken(config.token);
     try {
         console.log('Started refreshing application (/) commands.');
-
         await rest.put(
             Routes.applicationGuildCommands(config.appID, "726323752161378324"),
+            { body: commands },
+        )
+        await rest.put(
+            Routes.applicationGuildCommands(config.appID, "829656593347772466"),
             { body: commands },
         )
 

@@ -2,6 +2,7 @@ const { Interaction } = require("discord.js")
 const { average, classAverage } = require("./../pronote/note/average.js")
 const { homeworks, homeworksButtons } = require("./../pronote/homeworks/homeworks.js")
 const { edt, edtButtons } = require("./../pronote/edt/edt.js")
+const { register } = require('../pronote/register.js')
 
 /**
  * 
@@ -21,6 +22,9 @@ exports.onInteraction = async (interaction) => {
     }
     const { commandName, options } = interaction
     switch (commandName) {
+        case "register":
+            register(interaction)
+            break
         case "average":
             average(interaction)
             break

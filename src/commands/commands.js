@@ -3,6 +3,26 @@ const commandsBuilder = require("./commandsBuilder.js")
 
 exports.loadCommands = async (client) => {
     const commands = []
+    //load Register command
+    commands.push(
+        new SlashCommandBuilder()
+            .setName('register')
+            .setDescription('Permet de renseigner vos identifiants')
+            .addStringOption(option =>
+                option.setName('username')
+                    .setDescription('Votre nom d\'utilisateur')
+                    .setRequired(true))
+            .addStringOption(option =>
+                option.setName('password')
+                    .setDescription('Votre mot de passe')
+                    .setRequired(true))
+            .addStringOption(option =>
+                option.setName('url')
+                    .setDescription('L\'url de votre établissement (ex: "https://0382270l.index-education.net/pronote/")')
+                    .setRequired(true))
+            .toJSON()
+    )
+
     //load Homeworks command
     commands.push(
         new SlashCommandBuilder()

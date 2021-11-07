@@ -33,10 +33,11 @@ const generateEmbeds = async (interaction, date, userId, username) => {
             .setDescription(`${username}:||${userId}||`)
             .setThumbnail('attachment://logo.png'))
         for (let cours of timetable) {
+            if (cours.hasDuplicate && cours.isCancelled) continue
             let durationHours = cours.to.getHours()
             let durationMinutes = cours.to.getMinutes()
             if (durationMinutes < 10) durationMinutes = `0${durationMinutes}`
-            console.log(cours, date)
+
             let hours = cours.from.getHours()
             let minutes = cours.from.getMinutes()
             if (hours < 10) hours = `0${hours}`
@@ -44,11 +45,15 @@ const generateEmbeds = async (interaction, date, userId, username) => {
             const embed = new MessageEmbed()
                 .setColor(cours.color)
                 .setTitle(`${hours}:${minutes} - ${durationHours}:${durationMinutes}`)
-                .setDescription(`
-                    **${cours.subject}**
-                    __${cours.teacher}__
-                    ${cours.room}
-                `)
+                .setDescription(`**${cours.subject}**\n${cours.teacher?'__'+cours.teacher+'__\n':""}${cours.room?cours.room+'\n':""}`)
+
+            if (cours.isCancelled) {
+                embed.setDescription(`${embed.description}\n:red_square: **COURS ANNULE**`)
+            } else if (cours.isAway) {
+                embed.setDescription(`${embed.description}\n:red_square: **PROF ABSENT**`)
+            } else if (cours.status) {
+                embed.setDescription(`${embed.description}\n:blue_square: **${cours.status.toUpperCase()}**`)
+            }
             if (i + 1 == timetable.length) embed.setTimestamp()
             embeds.push(embed)
             i++
